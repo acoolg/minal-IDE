@@ -1,0 +1,164 @@
+@font-face {
+    font-family: 'consolas';
+    src: url(CONSOLA.ttf);
+    font-weight: normal;
+}
+
+:root {
+    --code-zone-clr: #282C34;
+    --code-zone-font: 'consolas';
+    --bellow-bar-hight: 20px;
+    --title-bar-hight: 30px;
+}
+
+body {
+    font-family: 'consolas';
+    margin: 0px;
+    background-color: #282C34;
+    display: flex;
+}
+
+.sus {
+    background-color: #acacac;
+    position: absolute;
+    width: 500px;
+    margin: 0px;
+
+    button {
+        height: 20px;
+        line-height: 0px;
+        font-size: 20px;
+        width: 100%;
+        text-align: left;
+        background-color: #acacac;
+        border: 0px;
+    }
+}
+
+
+
+.code-zone {
+    width: 100%;
+    height: calc(100dvh - var(--bellow-bar-hight) - var(--title-bar-hight));
+    margin: 0px;
+    margin-top: var(--title-bar-hight);
+    background-color: #282C34;
+    color: white;
+    font-family: 'consolas';
+    font-weight: normal;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.flashStick {
+    margin: 0px;
+    width: 2px;
+    height: 15px;
+    background-color: #fff;
+    display: inline-block;
+}
+
+.action {
+    color: #5cff82;
+}
+
+.property {
+    color: #ffff00;
+}
+
+.string {
+    color: #85fff7;
+}
+
+.number {
+    color: #ff5c5c;
+}
+
+.property-input {
+    color: #ff5cb3;
+}
+
+.input {
+    color: #615cff;
+}
+
+
+.type {
+    font-family: 'consolas';
+    background-color: transparent;
+    height: calc(100dvh - var(--bellow-bar-hight) - var(--title-bar-hight));
+    margin: 0px;
+    margin-top: var(--title-bar-hight);
+    border: 0px;
+    width: 50%;
+    padding: 0px;
+    color: #ffffff00;
+    z-index: 20;
+    font-size: 16px;
+    caret-color: white;
+    word-wrap: unset;
+    resize: none;
+    /* 禁用调整大小 */
+}
+
+.type:focus {
+    outline: none;
+}
+
+.color {
+    font-family: 'consolas';
+    background-color: transparent;
+    height: calc(100dvh - var(--bellow-bar-hight) - var(--title-bar-hight));
+    margin: 0px;
+    margin-top: var(--title-bar-hight);
+    border: 0px;
+    width: 50%;
+    padding: 0px;
+    position: fixed;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.test-zone {
+    height: calc(100dvh - var(--bellow-bar-hight) - var(--title-bar-hight));
+    margin: 0px;
+    margin-top: var(--title-bar-hight);
+    width: 50%;
+    background-color: #2a2a2a;
+    color: #fafafa;
+    display: flex;
+    flex-direction: column;
+}
+
+.bellow-bar {
+    height: var(--bellow-bar-hight);
+    background-color: #393a54;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+}
+
+.titlebar {
+    background: #329ea3;
+    user-select: none;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.titlebar-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.titlebar-button:hover {
+    background: #5bbec3;
+}
