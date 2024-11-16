@@ -1,7 +1,9 @@
-import { app } from "@tauri-apps/api";
+// import { app } from "@tauri-apps/api";
 import { settings as c } from "../config.js";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 console.log("working");
+
+const appWindow = getCurrentWindow();
 var typeZone = document.getElementById("type");
 var color = document.getElementById("color");
 var mouse = {
@@ -25,7 +27,7 @@ const syntaxRules = [
     // { regex: /\(.*?\)/g, css: 'symbol-s' }
 ];
 
-typeZone.addEventListener("keydown", async (e) => {
+typeZone.addEventListener("keydown", async () => {
     setTimeout(() => {
         colo(typeZone.value);
     }, 1);
@@ -113,8 +115,8 @@ function runcode(code) {
         } else if (thisLine.startsWith("branch")) {
             var nest = codeThatRealRuns[i].split("\n");
             console.log(nest);
-            for (var i = 1; i < nest.length; i++) {
-                printToTheTerminalLike(`${nest[i].slice(6)}(${i})<br>`);
+            for (var e = 1; e < nest.length; e++) {
+                printToTheTerminalLike(`${nest[e].slice(6)}(${e})<br>`);
             }
         }
     }
@@ -130,7 +132,7 @@ function printToTheTerminalLike(text) {
 //     terminal.innerHTML += string + "<br>";
 //     terminal.scrollTop = terminal.scrollHeight;
 // }
-const appWindow = getCurrentWindow();
+
 setInterval(async (e) => {
     console.log(isPointerOverElement(document.querySelector(".right-item"), mouse));
     
@@ -165,66 +167,7 @@ window.sharedVariables = () => {
     setupTrigger()
 }
 
-
-window.onload = async () => {
-    appWindow.toggleMaximize()
-    // await appWindow.setFullscreen(true)
-    setupTrigger()
-};
-
-document.querySelectorAll("#Ee").forEach(element => {
-    element.addEventListener("click", () => {
-        console.log("Ee button clicked");
-        appWindow.minimize();
-    });
-})
-
-async function setupTrigger() {
-    document
-        .querySelectorAll("#titlebar-minimize")
-        .forEach(element => {
-            element.addEventListener("click", (e) => {
-                e.stopPropagation()
-                console.log("Minimize button clicked");
-                appWindow.minimize();
-            });
-        });
-        
-    document
-        .querySelectorAll("#titlebar-maximize")
-        .forEach(element => {
-            element.addEventListener("click",async (e) =>  {
-                e.stopPropagation()
-                console.log("Maximize button clicked");
-                appWindow.toggleMaximize();
-            });
-        })
-    document.querySelectorAll("#titlebar-close")
-        .forEach(element => {
-            element.addEventListener("click", (e) => {
-                e.stopPropagation()
-                console.log("Close button clicked");
-                appWindow.close();
-            });
-        })
-    
-    document.getElementById("titlebar")?.addEventListener("mousedown", (e) => {
-        e.stopPropagation()
-        if(!isPointerOverElement(document.querySelector(".right-hitbox"), mouse) && !isPointerOverElement(document.querySelector(".left-item"), mouse)) {
-            
-            if (e.buttons === 1) {
-                // Primary (left) button
-                e.detail === 2
-                    ?  appWindow.toggleMaximize() // Maximize on double click
-                    : appWindow.startDragging(); // Else start dragging
-            }
-        }
-        
-    });
-    console.log("set up top button");
-}
-
 function isPointerOverElement(element, vector2) {
     const hoveredElement = document.elementFromPoint(vector2.x, vector2.y);
     return hoveredElement === element || element.contains(hoveredElement);
-  }
+}
