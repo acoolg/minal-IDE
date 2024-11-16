@@ -139,26 +139,83 @@ body {
 }
 
 .titlebar {
+    z-index: 30;
     background: #329ea3;
     user-select: none;
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
 }
+.titlebar .dragbar {
+    position: fixed;
+    width: calc(100% - 30px - 30px - 30px);
+    height: var(--title-bar-hight);
+}
+.titlebar .right-item {
+    width: 100%;
+    height: var(--title-bar-hight);
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    padding-right: 1px; /* 右側留空間，避免按鈕太靠近邊緣 */
+}
+
+.titlebar .right-item .right-hitbox {
+    margin: 0px;
+    padding: 0px;
+    width: fit-content;
+    display: flex;
+}
+
+.titlebar .left-item ul{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    list-style-type: none;
+    list-style-position:inside;
+    overflow: hidden;
+}
+
+.titlebar .left-item ul li{
+    text-align: center;
+    width: 50px;
+    unicode-bidi: isolate;
+    display: list-item;
+}
+
+.titlebar .left-item {
+    height: var(--title-bar-hight);
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    padding-left: 0px; /* 右側留空間，避免按鈕太靠近邊緣 */
+}
 
 .titlebar-button {
-    display: inline-flex;
+    z-index: 40;
     justify-content: center;
+    display: inline-flex;
     align-items: center;
     width: 30px;
     height: 30px;
+    padding: 0px 5px;
     user-select: none;
     -webkit-user-select: none;
+    margin: 0px;
+    transition: all 0.1s ease-in-out;
 }
 
 .titlebar-button:hover {
-    background: #5bbec3;
+    background: var(--titlebar-window-control-button-hover-bg-color);
+}
+
+.blue {
+    --titlebar-window-control-button-hover-bg-color: #78f8ff9d;
+}
+
+.red{
+    --titlebar-window-control-button-hover-bg-color: #ff00009d;
 }

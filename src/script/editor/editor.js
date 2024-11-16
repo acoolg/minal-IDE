@@ -1,8 +1,18 @@
-import { settings as c } from "./config.js";
+import { app } from "@tauri-apps/api";
+import { settings as c } from "../config.js";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 console.log("working");
 var typeZone = document.getElementById("type");
 var color = document.getElementById("color");
+var mouse = {
+    x: 0,
+    y: 0
+}
+document.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+})
+
 const syntaxRules = [
     { regex: /(["'`])(?:\\.|[^\\])*?\1/g, css: "string" },
     { regex: /\b(say|portal)/g, css: "action" },
@@ -120,8 +130,20 @@ function printToTheTerminalLike(text) {
 //     terminal.innerHTML += string + "<br>";
 //     terminal.scrollTop = terminal.scrollHeight;
 // }
-
-setInterval((e) => {
+const appWindow = getCurrentWindow();
+setInterval(async (e) => {
+    console.log(isPointerOverElement(document.querySelector(".right-item"), mouse));
+    
+    // document.querySelectorAll(".")
+    if(await appWindow.isMaximized()){
+        document
+            .getElementById("titlebar-maximize")
+            .innerHTML = '<img src="https://api.iconify.design/mdi:window-restore.svg" alt="maximize" />'
+    } else {
+        document
+            .getElementById("titlebar-maximize")
+            .innerHTML = '<img src="https://api.iconify.design/mdi:window-maximize.svg" alt="maximize" />'
+    }
     runcode(typeZone.value);
 }, 100);
 
@@ -137,31 +159,72 @@ function runItem(text) {
     }
 }
 
-window.onload = () => {
-    const appWindow = getCurrentWindow();
-    document
-        .getElementById("titlebar-minimize")
-        ?.addEventListener("click", () => {
-            console.log("Minimize button clicked");
-            appWindow.minimize();
-        });
-    document
-        .getElementById("titlebar-maximize")
-        ?.addEventListener("click", () => {
-            console.log("Maximize button clicked");
-            appWindow.toggleMaximize();
-        });
-    document.getElementById("titlebar-close")?.addEventListener("click", () => {
-        console.log("Close button clicked");
-        appWindow.close();
+
+
+window.sharedVariables = () => {
+    setupTrigger()
+}
+
+
+window.onload = async () => {
+    appWindow.toggleMaximize()
+    // await appWindow.setFullscreen(true)
+    setupTrigger()
+};
+
+document.querySelectorAll("#Ee").forEach(element => {
+    element.addEventListener("click", () => {
+        console.log("Ee button clicked");
+        appWindow.minimize();
     });
+})
+
+async function setupTrigger() {
+    document
+        .querySelectorAll("#titlebar-minimize")
+        .forEach(element => {
+            element.addEventListener("click", (e) => {
+                e.stopPropagation()
+                console.log("Minimize button clicked");
+                appWindow.minimize();
+            });
+        });
+        
+    document
+        .querySelectorAll("#titlebar-maximize")
+        .forEach(element => {
+            element.addEventListener("click",async (e) =>  {
+                e.stopPropagation()
+                console.log("Maximize button clicked");
+                appWindow.toggleMaximize();
+            });
+        })
+    document.querySelectorAll("#titlebar-close")
+        .forEach(element => {
+            element.addEventListener("click", (e) => {
+                e.stopPropagation()
+                console.log("Close button clicked");
+                appWindow.close();
+            });
+        })
+    
     document.getElementById("titlebar")?.addEventListener("mousedown", (e) => {
-        if (e.buttons === 1) {
-            // Primary (left) button
-            e.detail === 2
-                ? appWindow.toggleMaximize() // Maximize on double click
-                : appWindow.startDragging(); // Else start dragging
+        e.stopPropagation()
+        if(!isPointerOverElement(document.querySelector(".right-hitbox"), mouse) && !isPointerOverElement(document.querySelector(".left-item"), mouse)) {
+            
+            if (e.buttons === 1) {
+                // Primary (left) button
+                e.detail === 2
+                    ?  appWindow.toggleMaximize() // Maximize on double click
+                    : appWindow.startDragging(); // Else start dragging
+            }
         }
+        
     });
     console.log("set up top button");
-};
+}
+
+function isPointerOverElement(element, vector2) {
+    const hoveredElement = document.elementFromPoint(vector2.x, vector2.y);
+    return hoveredElement === element || element.contains(hoveredElement);
+  }
