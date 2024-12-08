@@ -4,45 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/theme.css">
-    <script type="module" src="./script/editor/editor.js"></script>
-    <script type="module" src="./script/editor/ui.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            justify-items: center;
+            text-align: center;
+        }
+
+        img {
+            left: 50%;
+            top: 42%;
+            transform: translate(-50%, -50%);
+            position: fixed;
+        }
+
+        .loader {
+            position: fixed;
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #FF3D00;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            left: 50%;
+            top: calc(42% + 60px);
+            transform: translate(-50%, -50%);
+            position: fixed;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="titlebar" class="titlebar">
-        <div class="left-item">
-            <ul>
-                <li>File</li>
-                <li>View</li>
-                <li>Help</li>
-            </ul>
-        </div>
-        <div class="right-item">
-            <div class="right-hitbox" id="right-hitbox">
-                    <div class="titlebar-button blue" id="titlebar-minimize">
-                    <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" />
-                </div>
-                <div class="titlebar-button blue" id="titlebar-maximize">
-                    <img src="https://api.iconify.design/mdi:window-maximize.svg" alt="maximize" />
-                </div>
-                <div class="titlebar-button red" id="titlebar-close" :doooo>
-                    <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
-                </div>
-            </div>
-            
-        </div>
-        
-        
-    </div>
-    <div class="sus" id="sus"></div>
-    <pre class="color" id="color"></pre>
-    <textarea name="thing" id="type" class="type"></textarea>
-    <!-- <pre class="code-zone" id="code-zone"></pre> -->
-    <div class="test-zone" id="test-zone">
-    </div>
-    <div class="bellow-bar"></div>
+    <img src="assets/title-screen/title.png" alt="" width="90%">
+    <span class="loader"></span>
+    <script type="module" src="./jump.js">
+    </script>
 </body>
 
 </html>
