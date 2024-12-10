@@ -9,6 +9,8 @@
     --code-zone-font: 'consolas';
     --bellow-bar-hight: 20px;
     --title-bar-hight: 30px;
+    --title-bar-bg-clr: #329ea3;
+    --title-bar-bg-hover-clr: #61a8ab;
 }
 
 body {
@@ -177,13 +179,30 @@ body {
     list-style-type: none;
     list-style-position:inside;
     overflow: hidden;
+    vertical-align: middle;
 }
 
 .titlebar .left-item ul li{
     text-align: center;
     width: 50px;
+    height: 20px;
     unicode-bidi: isolate;
     display: list-item;
+    background-color: var(--title-bar-bg-clr);
+    vertical-align: middle;
+    transition: all 0.1s ease-in-out;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.titlebar .left-item ul :hover{
+    background-color: var(--title-bar-bg-hover-clr);
+}
+
+.titlebar .left-item img{
+    width: 25px;
+    height: 25px;
+    margin: 5px;
 }
 
 .titlebar .left-item {
@@ -218,4 +237,17 @@ body {
 
 .red{
     --titlebar-window-control-button-hover-bg-color: #ff00009d;
+}
+
+.tab{
+    height: calc(100dvh - var(--bellow-bar-hight) - var(--title-bar-hight));
+    margin: 0px;
+    margin-top: var(--title-bar-hight);
+    width: 100%;
+}
+
+.tab-main{
+    height: calc(100dvh - var(--bellow-bar-hight) - var(--title-bar-hight) - 50px);
+    margin: 0px;
+    width: 100%;
 }

@@ -1,6 +1,8 @@
 // import { app } from "@tauri-apps/api";
 import { settings as c } from "../config.js";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { openTabIn } from "./system/tab.js";
+import { path } from "@tauri-apps/api";
 console.log("working");
 
 const appWindow = getCurrentWindow();
@@ -14,7 +16,16 @@ document.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
 })
-
+/*
+ * Opens a tab at the specified path within the given element.
+ *
+ * @param {string} path - The path where the tab will be opened.
+ * @return {void}
+ */
+window.tab = function() {
+    openTabIn("/src/assets/tab/code.html", document.getElementById("tab-main"));
+}
+    
 const syntaxRules = [
     { regex: /(["'`])(?:\\.|[^\\])*?\1/g, css: "string" },
     { regex: /\b(say|portal)/g, css: "action" },
@@ -45,6 +56,12 @@ typeZone.addEventListener("keypress", async () => {
     }, 1);
 });
 
+/**
+ * Highlights the given text based on predefined syntax rules and updates the color element's innerHTML.
+ *
+ * @param {string} text - The text to be highlighted.
+ * @return {void}
+ */
 function colo(text) {
     color.innerHTML = ""; // ��空之前的高��
     let highlightedText = text;
@@ -91,37 +108,6 @@ function setCursorPosition(elem, pos) {
     elem.focus();
 }
 
-function runcode(code) {
-    var codeThatSplits = code.split("\n");
-
-    var codeThatRealRuns = [];
-
-    codeThatSplits.forEach((element) => {
-        if (element.startsWith(c.tab)) {
-            codeThatRealRuns[codeThatRealRuns.length - 1] += "\n" + element;
-        } else {
-            codeThatRealRuns.push(element);
-        }
-    });
-
-    var terminal = document.getElementById("test-zone");
-    terminal.innerHTML = "";
-
-    for (var i = 0; i < codeThatRealRuns.length; i++) {
-        var thisLine = codeThatRealRuns[i];
-
-        if (thisLine.startsWith("say ")) {
-            terminal.innerHTML += "> " + thisLine.slice(4) + "<br>";
-        } else if (thisLine.startsWith("branch")) {
-            var nest = codeThatRealRuns[i].split("\n");
-            console.log(nest);
-            for (var e = 1; e < nest.length; e++) {
-                printToTheTerminalLike(`${nest[e].slice(6)}(${e})<br>`);
-            }
-        }
-    }
-}
-
 function printToTheTerminalLike(text) {
     var terminal = document.getElementById("test-zone");
     terminal.innerHTML += text;
@@ -148,24 +134,6 @@ setInterval(async (e) => {
     }
     runcode(typeZone.value);
 }, 100);
-
-function runItem(text) {
-    if (thisLine.startsWith("say ")) {
-        terminal.innerHTML += "> " + thisLine.slice(4) + "<br>";
-    } else if (thisLine.startsWith("portal")) {
-        var nest = codeThatRealRuns[i].split("\n");
-        console.log(nest);
-        for (var i = 1; i < nest.length; i++) {
-            printToTheTerminalLike(`${nest[i].slice(6)}(${i})<br>`);
-        }
-    }
-}
-
-
-
-window.sharedVariables = () => {
-    setupTrigger()
-}
 
 function isPointerOverElement(element, vector2) {
     const hoveredElement = document.elementFromPoint(vector2.x, vector2.y);

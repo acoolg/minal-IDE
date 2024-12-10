@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../style/style.css" />
+        <link rel="stylesheet" href="../style/theme.css" />
+        <script type="module" src="../script/editor/editor.js"></script>
+        <script type="module" src="../script/editor/ui.js"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/theme.css">
-    <script type="module" src="../script/editor/editor.js"></script>
-    <script type="module" src="../script/editor/ui.js"></script>
-</head>
-
-<body>
-    <div id="titlebar" class="titlebar">
-        <div class="left-item">
-            <ul>
-                <li>File</li>
-                <li>View</li>
-                <li>Help</li>
-            </ul>
-        </div>
-        <div class="right-item">
-            <div class="right-hitbox" id="right-hitbox">
+    <body>
+        <div id="titlebar" class="titlebar">
+            <div class="left-item">
+                <img
+                    src="/src/assets/image/title-bar/icon.png"
+                    alt="icon"
+                    srcset=""
+                    width="25px"
+                />
+                <ul>
+                    <li>File</li>
+                    <li>View</li>
+                    <li>Help</li>
+                </ul>
+            </div>
+            <div class="right-item">
+                <div class="right-hitbox" id="right-hitbox">
                     <div class="titlebar-button blue" id="titlebar-minimize">
-                    <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" />
-                </div>
-                <div class="titlebar-button blue" id="titlebar-maximize">
-                    <img src="https://api.iconify.design/mdi:window-maximize.svg" alt="maximize" />
-                </div>
-                <div class="titlebar-button red" id="titlebar-close" :doooo>
-                    <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
+                        <img
+                            src="https://api.iconify.design/mdi:window-minimize.svg"
+                            alt="minimize"
+                        />
+                    </div>
+                    <div class="titlebar-button blue" id="titlebar-maximize">
+                        <img
+                            src="https://api.iconify.design/mdi:window-maximize.svg"
+                            alt="maximize"
+                        />
+                    </div>
+                    <div class="titlebar-button red" id="titlebar-close" :doooo>
+                        <img
+                            src="https://api.iconify.design/mdi:close.svg"
+                            alt="close"
+                        />
+                    </div>
                 </div>
             </div>
-            
         </div>
-        
-        
-    </div>
-    <div class="sus" id="sus"></div>
-    <pre class="color" id="color"></pre>
-    <textarea name="thing" id="type" class="type"></textarea>
-    <!-- <pre class="code-zone" id="code-zone"></pre> -->
-    <div class="test-zone" id="test-zone">
-    </div>
-    <div class="bellow-bar"></div>
-</body>
+        <div class="tab" id="tab">
+            <div class="tab-bar" id="tab-bar"></div>
+            <div class="tab-main" id="tab-main"></div>
+        </div>
 
+        <div class="bellow-bar"></div>
+    </body>
 </html>
