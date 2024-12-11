@@ -80,14 +80,14 @@ function colo(text) {
     color.innerHTML = highlightedText.replace(/\n/g, "<br>");
 }
 
-typeZone.addEventListener("keydown", function (e) {
-    // 检测输入的是否是左括号
-    if (e.key === "(") {
-        e.preventDefault(); // 阻止默认行为
-        insertTextAtCursor("()"); // 插入一对括号
-        setCursorPosition(typeZone, typeZone.selectionStart - 1); // 将光标移到括号之间
-    }
-});
+// typeZone.addEventListener("keydown", function (e) {
+//     // 检测输入的是否是左括号
+//     if (e.key === "(") {
+//         e.preventDefault(); // 阻止默认行为
+//         insertTextAtCursor("()"); // 插入一对括号
+//         setCursorPosition(typeZone, typeZone.selectionStart - 1); // 将光标移到括号之间
+//     }
+// });
 
 // 在光标位置插入文本
 function insertTextAtCursor(text) {
@@ -132,7 +132,6 @@ setInterval(async (e) => {
             .getElementById("titlebar-maximize")
             .innerHTML = '<img src="https://api.iconify.design/mdi:window-maximize.svg" alt="maximize" />'
     }
-    runcode(typeZone.value);
 }, 100);
 
 function isPointerOverElement(element, vector2) {

@@ -69,3 +69,18 @@ async function setupTrigger() {
     });
     console.log("set up top button");
 }
+
+setInterval(async (e) => {
+    console.log(isPointerOverElement(document.querySelector(".right-item"), mouse));
+    
+    // document.querySelectorAll(".")
+    if(await appWindow.isMaximized()){
+        document
+            .getElementById("titlebar-maximize")
+            .innerHTML = '<img src="https://api.iconify.design/mdi:window-restore.svg" alt="maximize" />'
+    } else {
+        document
+            .getElementById("titlebar-maximize")
+            .innerHTML = '<img src="https://api.iconify.design/mdi:window-maximize.svg" alt="maximize" />'
+    }
+}, 100);
